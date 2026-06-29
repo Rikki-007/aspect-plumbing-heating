@@ -3,8 +3,14 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
-type RevealProps = { children: ReactNode; delay?: number; y?: number; className?: string };
+type RevealProps = {
+  children: ReactNode;
+  delay?: number;
+  y?: number;
+  className?: string;
+};
 
+/** Fade + rise into view on scroll. Respects prefers-reduced-motion via framer. */
 export function Reveal({ children, delay = 0, y = 24, className }: RevealProps) {
   return (
     <motion.div
@@ -19,27 +25,47 @@ export function Reveal({ children, delay = 0, y = 24, className }: RevealProps) 
   );
 }
 
-export function StaggerGroup({ children, className }: { children: ReactNode; className?: string }) {
+/** Staggered container for lists of cards. */
+export function StaggerGroup({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-60px" }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+      variants={{
+        hidden: {},
+        show: { transition: { staggerChildren: 0.1 } },
+      }}
     >
       {children}
     </motion.div>
   );
 }
 
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
+export function StaggerItem({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <motion.div
       className={className}
       variants={{
         hidden: { opacity: 0, y: 24 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+        },
       }}
     >
       {children}

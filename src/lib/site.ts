@@ -1,6 +1,7 @@
 /**
  * Aspect Plumbing & Heating — central site content.
  * Edit everything here: phone, address, services, reviews, etc.
+ * Most of this was sourced from the Google Business listing.
  */
 
 export const site = {
@@ -11,13 +12,18 @@ export const site = {
   description:
     "Fully insured, RGI-registered plumbing and heating service in Lucan, Co. Dublin. 24-hour emergency callouts, gas boilers installed, serviced & repaired, leaks, bathrooms and heating — done right, at a fair price.",
 
+  // Credentials shown across the site (from the business-card logo)
   credentials: ["Fully Insured", "Registered Gas Installer (RGI)"],
 
+  // Contact
   phoneDisplay: "087 121 2570",
-  phoneIntl: "+353871212570",
-  email: "info@aspectplumbing.ie", // TODO: replace with the real email
-  formspreeId: "YOUR_FORM_ID", // create a free form at https://formspree.io
+  phoneIntl: "+353871212570", // used for tel: links
+  email: "info@aspectplumbing.ie", // TODO: replace with Anthony's real email
+  // Formspree endpoint for the contact form. Create a free form at
+  // https://formspree.io and paste the endpoint id below (e.g. "xnnqzabc").
+  formspreeId: "YOUR_FORM_ID",
 
+  // Location
   address: {
     line1: "1 Foxborough Lane",
     area: "Balgaddy, Lucan",
@@ -25,26 +31,40 @@ export const site = {
     eircode: "K78 V299",
     country: "Ireland",
   },
+  // Plus code from Google: 8HQG+WV Lucan
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Aspect+Plumbing+and+Heating+Lucan",
+  // Generic embed centred on Lucan; swap for the exact listing embed when available.
   mapsEmbedQuery: "1+Foxborough+Lane,+Balgaddy,+Lucan,+Co.+Dublin",
 
   hours: "Open 24 hours — 7 days a week",
   emergency: true,
 
+  // Service area
   serviceArea: [
-    "Lucan", "Clondalkin", "Palmerstown", "Adamstown",
-    "Leixlip", "Celbridge", "Newcastle", "Dublin West",
+    "Lucan",
+    "Clondalkin",
+    "Palmerstown",
+    "Adamstown",
+    "Leixlip",
+    "Celbridge",
+    "Newcastle",
+    "Dublin West",
   ],
 
+  // Google rating
   rating: { score: 4.2, count: 15 },
 
-  social: { facebook: "", instagram: "" },
+  social: {
+    // Add real links when available
+    facebook: "",
+    instagram: "",
+  },
 } as const;
 
 export type Service = {
   slug: string;
   title: string;
-  icon: string;
+  icon: string; // react-icons name handled in component
   blurb: string;
   points: string[];
 };
@@ -108,25 +128,39 @@ export type Review = {
   text: string;
 };
 
+// Real reviews pulled from the Google Business listing.
 export const reviews: Review[] = [
   {
-    name: "Scabby Burns", role: "Local Guide", stars: 5, when: "a year ago",
+    name: "Scabby Burns",
+    role: "Local Guide",
+    stars: 5,
+    when: "a year ago",
     text: "Anto was an absolute pleasure to deal with. I had a very tricky plumbing problem which 2 previous plumbers were unable to fix — not only did he identify what was wrong, he then fixed it on the very same day for a very reasonable price.",
   },
   {
-    name: "Sudhitha Reddy", stars: 5, when: "2 years ago",
+    name: "Sudhitha Reddy",
+    stars: 5,
+    when: "2 years ago",
     text: "Anthony was very professional and excellent quality of work. His experience made the work look easy and it was fixed in quick time. His response was very quick and I'd recommend him to my family and friends.",
   },
   {
-    name: "Ronan Merrick", role: "Local Guide", stars: 5, when: "a year ago",
+    name: "Ronan Merrick",
+    role: "Local Guide",
+    stars: 5,
+    when: "a year ago",
     text: "Sound lad. Helped me fix my broken toilet that I made even worse trying to fix myself, and did a great job. Fair price too.",
   },
   {
-    name: "Alex Rankin", stars: 5, when: "3 years ago",
+    name: "Alex Rankin",
+    stars: 5,
+    when: "3 years ago",
     text: "Came out the same day as I called, was very friendly and professional, and fixed the leak in no time. Was great value, and I would highly recommend them.",
   },
   {
-    name: "Maurice O'Connell", role: "Local Guide", stars: 5, when: "2 years ago",
+    name: "Maurice O'Connell",
+    role: "Local Guide",
+    stars: 5,
+    when: "2 years ago",
     text: "Friendly guy. Job done efficiently and for a fair price. Explained what was wrong and gave advice. Would happily use again.",
   },
 ];
@@ -146,5 +180,6 @@ export const trustBadges = [
   { stat: "4.2★", label: "Rated on Google" },
 ];
 
+// Helpers
 export const telHref = `tel:${site.phoneIntl}`;
 export const fullAddress = `${site.address.line1}, ${site.address.area}, ${site.address.county}, ${site.address.eircode}`;

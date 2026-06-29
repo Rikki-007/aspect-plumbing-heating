@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "A look at recent plumbing and heating work by Aspect Plumbing & Heating in Lucan and Dublin — boiler installs, bathrooms, heating systems and more.",
 };
 
+// Each tile maps to a real photo you'll send. Caption = the shot we want.
 const gallery = [
   { label: "Boiler installation", icon: "fire", span: "lg:col-span-2 lg:row-span-2", aspect: "aspect-square lg:aspect-auto lg:h-full" },
   { label: "Combi boiler service", icon: "fire", span: "", aspect: "aspect-[4/3]" },
@@ -24,19 +25,28 @@ const gallery = [
 export default function GalleryPage() {
   return (
     <>
-      <PageHero crumb="Gallery" eyebrow="Our work"
+      <PageHero
+        crumb="Gallery"
+        eyebrow="Our work"
         title="Recent jobs around Lucan & Dublin"
-        intro="A snapshot of the plumbing and heating work we do every week. Tidy installs, proper repairs and happy homeowners." />
+        intro="A snapshot of the plumbing and heating work we do every week. Tidy installs, proper repairs and happy homeowners."
+      />
 
       <section className="bg-white py-16 sm:py-20">
         <div className="container-x">
           <StaggerGroup className="grid auto-rows-auto grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {gallery.map((g, i) => (
               <StaggerItem key={i} className={g.span}>
-                <MediaTile label={g.label} icon={g.icon} aspect={g.aspect} className="h-full" />
+                <MediaTile
+                  label={g.label}
+                  icon={g.icon}
+                  aspect={g.aspect}
+                  className="h-full"
+                />
               </StaggerItem>
             ))}
           </StaggerGroup>
+
           <Reveal>
             <p className="mx-auto mt-10 max-w-xl text-center text-sm text-slatey">
               These are placeholders — once you send through photos of real jobs, vans and

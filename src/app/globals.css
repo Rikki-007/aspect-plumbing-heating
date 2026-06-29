@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Aspect Plumbing & Heating — Design System
+   Brand: trust-navy + clean blue + warm flame accent
+   ============================================================ */
+
 @theme {
+  /* Brand palette */
   --color-navy: #0a2540;
   --color-navy-700: #103a5e;
   --color-blue: #1273c4;
@@ -14,13 +20,16 @@
   --color-mist: #f5f8fb;
   --color-line: #e4ecf3;
 
+  /* Typography */
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), var(--font-body), ui-sans-serif, sans-serif;
 
+  /* Effects */
   --shadow-soft: 0 4px 24px -8px rgb(10 37 64 / 0.18);
   --shadow-card: 0 10px 40px -12px rgb(10 37 64 / 0.22);
   --shadow-lift: 0 20px 50px -16px rgb(10 37 64 / 0.30);
 
+  /* Animation */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -29,7 +38,9 @@
   --foreground: var(--color-ink);
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);
@@ -44,6 +55,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
 }
 
+/* Utility: section container */
 .container-x {
   width: 100%;
   max-width: 1200px;
@@ -51,6 +63,7 @@ h1, h2, h3, h4 {
   padding-inline: 1.25rem;
 }
 
+/* Reusable gradient surfaces */
 .bg-hero {
   background:
     linear-gradient(180deg, rgb(10 37 64 / 0.86) 0%, rgb(10 37 64 / 0.72) 55%, rgb(13 83 144 / 0.78) 100%),
@@ -71,9 +84,11 @@ h1, h2, h3, h4 {
   color: transparent;
 }
 
+/* Thin scrollbar for galleries */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Focus visibility for accessibility */
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--color-flame);
   outline-offset: 2px;

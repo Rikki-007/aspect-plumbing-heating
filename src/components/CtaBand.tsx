@@ -6,7 +6,10 @@ import { Reveal } from "./Reveal";
 export function CtaBand({
   title = "Got a plumbing or heating problem?",
   subtitle = "Pick up the phone — Anthony answers day or night and aims to be with you the same day.",
-}: { title?: string; subtitle?: string }) {
+}: {
+  title?: string;
+  subtitle?: string;
+}) {
   return (
     <section className="relative overflow-hidden bg-navy-mesh">
       <div className="container-x relative py-16 sm:py-20">
@@ -15,8 +18,12 @@ export function CtaBand({
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white ring-1 ring-white/15">
               <LuClock className="h-4 w-4 text-flame" /> {site.hours}
             </span>
-            <h2 className="mt-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl">{title}</h2>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-sky/80">{subtitle}</p>
+            <h2 className="mt-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+              {title}
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-sky/80">
+              {subtitle}
+            </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button href={telHref} variant="flame" external className="w-full sm:w-auto">
                 <LuPhone className="h-4 w-4" /> Call {site.phoneDisplay}
