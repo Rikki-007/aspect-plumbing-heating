@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a2540;
+  --color-navy-700: #103a5e;
+  --color-blue: #1273c4;
+  --color-blue-600: #0f63ab;
+  --color-blue-700: #0d5390;
+  --color-sky: #e8f3fc;
+  --color-flame: #f0512b;
+  --color-flame-600: #d83e1c;
+  --color-ink: #0f1b2a;
+  --color-slatey: #5b6b7c;
+  --color-mist: #f5f8fb;
+  --color-line: #e4ecf3;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-body), ui-sans-serif, sans-serif;
+
+  --shadow-soft: 0 4px 24px -8px rgb(10 37 64 / 0.18);
+  --shadow-card: 0 10px 40px -12px rgb(10 37 64 / 0.22);
+  --shadow-lift: 0 20px 50px -16px rgb(10 37 64 / 0.30);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-ink);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.container-x {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.bg-hero {
+  background:
+    linear-gradient(180deg, rgb(10 37 64 / 0.86) 0%, rgb(10 37 64 / 0.72) 55%, rgb(13 83 144 / 0.78) 100%),
+    radial-gradient(120% 120% at 80% -10%, #1273c4 0%, #0a2540 60%);
+}
+
+.bg-navy-mesh {
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgb(18 115 196 / 0.45) 0%, transparent 55%),
+    radial-gradient(60% 100% at 0% 100%, rgb(240 81 43 / 0.20) 0%, transparent 50%),
+    #0a2540;
+}
+
+.text-gradient-flame {
+  background: linear-gradient(95deg, #f0512b, #ffb347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-flame);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
