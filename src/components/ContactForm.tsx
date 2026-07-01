@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { site } from "@/lib/site";
-import { LuCheck, LuArrowRight } from "./icons";
+import { LuCheck, LuArrowRight, LuMail } from "./icons";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "ready" | "submitting" | "success" | "error";
 
 const services = [
   "Emergency / urgent",
@@ -18,17 +18,18 @@ const services = [
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const configured =
-    site.formspreeId && site.formspreeId !== "YOUR_FORM_ID";
+  const [gmailUrl, setGmailUrl] = useState("");
+  const configured = site.formspreeId && site.formspreeId !== "YOUR_FORM_ID";
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // If Formspree isn't set up yet, open Gmail's compose window in a new tab,
-    // pre-filled and addressed to Aspect. This works in the browser even when
-    // no desktop mail app is set as the default (unlike a plain mailto: link).
+    // No Formspree yet → build a pre-filled Gmail compose link and show a
+    // confirmation step. We DON'T auto-open (browsers block pop-ups opened
+    // from a submit handler). Instead the customer clicks a real link, which
+    // always opens — and it clearly asks permission first.
     if (!configured) {
       const subject = encodeURIComponent(
         `Website enquiry — ${data.get("service") || "General"}`
@@ -36,11 +37,12 @@ export function ContactForm() {
       const body = encodeURIComponent(
         `Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`
       );
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-        site.email
-      )}&su=${subject}&body=${body}`;
-      window.open(gmailUrl, "_blank", "noopener,noreferrer");
-      setStatus("success");
+      setGmailUrl(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+          site.email
+        )}&su=${subject}&body=${body}`
+      );
+      setStatus("ready");
       return;
     }
 
@@ -62,13 +64,51 @@ export function ContactForm() {
     }
   }
 
+  // Confirmation / permission step — customer clicks to open Gmail
+  if (status === "ready") {
+    return (
+      <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-soft">
+        <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-sky text-blue-700">
+          <LuMail className="h-7 w-7" />
+        </span>
+        <h3 className="mt-4 text-xl font-bold text-navy">Your message is ready</h3>
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slatey">
+          Click below to open Gmail in a new tab with your message pre-filled and
+          addressed to us — then just press <strong>Send</strong>.
+        </p>
+        <a
+          href={gmailUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setStatus("success")}
+          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-flame px-6 py-3.5 text-sm font-bold text-white shadow-soft transition-all hover:scale-[1.01] hover:bg-flame-600"
+        >
+          <LuMail className="h-4 w-4" /> Open Gmail &amp; send
+        </a>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-3 text-sm font-semibold text-slatey transition-colors hover:text-navy"
+        >
+          ← Edit message
+        </button>
+        <p className="mt-5 border-t border-line pt-4 text-xs text-slatey">
+          Prefer to call?{" "}
+          <a href={`tel:${site.phoneIntl}`} className="font-semibold text-blue-700">
+            {site.phoneDisplay}
+          </a>
+        </p>
+      </div>
+    );
+  }
+
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-line bg-white p-8 text-center shadow-soft">
         <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-sky text-blue-700">
           <LuCheck className="h-7 w-7" />
         </span>
-        <h3 className="mt-4 text-xl font-bold text-navy">Thanks — message sent!</h3>
+        <h3 className="mt-4 text-xl font-bold text-navy">Thanks — message on its way!</h3>
         <p className="mt-2 text-sm text-slatey">
           Anthony will be in touch shortly. For anything urgent, please call{" "}
           <a href={`tel:${site.phoneIntl}`} className="font-semibold text-blue-700">
@@ -157,7 +197,7 @@ export function ContactForm() {
 
       {!configured && (
         <p className="mt-3 text-center text-xs text-slatey">
-          This opens a pre-filled Gmail message in a new tab — just press send.
+          We&apos;ll open Gmail with your message ready — you press send. No account? Just call us.
         </p>
       )}
     </form>
