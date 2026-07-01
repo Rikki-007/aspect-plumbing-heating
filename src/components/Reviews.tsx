@@ -1,6 +1,6 @@
 import { reviews, site } from "@/lib/site";
-import { Stars } from "./ui";
-import { LuQuote } from "./icons";
+import { Stars, Button } from "./ui";
+import { LuQuote, LuStar, LuArrowUpRight } from "./icons";
 import { StaggerGroup, StaggerItem } from "./Reveal";
 
 export function Reviews({ limit }: { limit?: number }) {
@@ -28,6 +28,29 @@ export function Reviews({ limit }: { limit?: number }) {
         </StaggerItem>
       ))}
     </StaggerGroup>
+  );
+}
+
+export function ReviewsCta() {
+  return (
+    <div className="rounded-3xl border border-line bg-white p-8 text-center shadow-soft sm:p-10">
+      <div className="flex justify-center">
+        <Stars value={5} />
+      </div>
+      <h3 className="mt-4 text-2xl font-bold text-navy">Happy with our work?</h3>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slatey">
+        Leave us a review on Google — it takes a minute and helps other homeowners
+        find a plumber they can trust. All our reviews come straight from Google.
+      </p>
+      <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+        <Button href={site.reviewUrl} variant="flame" external>
+          <LuStar className="h-4 w-4" /> Write a Google review
+        </Button>
+        <Button href={site.mapsUrl} variant="ghost" external>
+          Read all reviews on Google <LuArrowUpRight className="h-4 w-4" />
+        </Button>
+      </div>
+    </div>
   );
 }
 

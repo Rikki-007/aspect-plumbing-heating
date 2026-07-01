@@ -1,7 +1,7 @@
 import { site, telHref, trustBadges } from "@/lib/site";
 import { Button, SectionHeading, CheckItem } from "@/components/ui";
 import { ServiceCards } from "@/components/ServiceCards";
-import { Reviews, RatingBadge } from "@/components/Reviews";
+import { Reviews, RatingBadge, ReviewsCta } from "@/components/Reviews";
 import { MediaTile } from "@/components/MediaTile";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
@@ -238,11 +238,11 @@ export default function HomePage() {
           <div className="mt-12">
             <Reviews limit={3} />
           </div>
-          <div className="mt-10 text-center">
-            <Button href="/about#reviews" variant="navy">
-              Read more reviews <LuArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
+          <Reveal>
+            <div className="mt-8">
+              <ReviewsCta />
+            </div>
+          </Reveal>
         </div>
       </section>
 

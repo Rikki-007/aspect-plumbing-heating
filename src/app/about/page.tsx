@@ -3,7 +3,7 @@ import { site, telHref } from "@/lib/site";
 import { PageHero } from "@/components/PageHero";
 import { Button, SectionHeading, CheckItem } from "@/components/ui";
 import { MediaTile } from "@/components/MediaTile";
-import { Reviews, RatingBadge } from "@/components/Reviews";
+import { Reviews, RatingBadge, ReviewsCta } from "@/components/Reviews";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/Reveal";
 import {
@@ -163,6 +163,11 @@ export default function AboutPage() {
           <div className="mt-12">
             <Reviews />
           </div>
+          <Reveal>
+            <div className="mt-8">
+              <ReviewsCta />
+            </div>
+          </Reveal>
         </div>
       </section>
 

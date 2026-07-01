@@ -26,7 +26,9 @@ export function ContactForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // If Formspree isn't set up yet, fall back to opening the user's email client.
+    // If Formspree isn't set up yet, open Gmail's compose window in a new tab,
+    // pre-filled and addressed to Aspect. This works in the browser even when
+    // no desktop mail app is set as the default (unlike a plain mailto: link).
     if (!configured) {
       const subject = encodeURIComponent(
         `Website enquiry — ${data.get("service") || "General"}`
@@ -34,7 +36,11 @@ export function ContactForm() {
       const body = encodeURIComponent(
         `Name: ${data.get("name")}\nPhone: ${data.get("phone")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`
       );
-      window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+        site.email
+      )}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      setStatus("success");
       return;
     }
 
@@ -151,7 +157,7 @@ export function ContactForm() {
 
       {!configured && (
         <p className="mt-3 text-center text-xs text-slatey">
-          Note: until the form is connected, this opens your email app addressed to Aspect.
+          This opens a pre-filled Gmail message in a new tab — just press send.
         </p>
       )}
     </form>

@@ -35,6 +35,10 @@ export const site = {
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Aspect+Plumbing+and+Heating+Lucan",
   // Generic embed centred on Lucan; swap for the exact listing embed when available.
   mapsEmbedQuery: "1+Foxborough+Lane,+Balgaddy,+Lucan,+Co.+Dublin",
+  // "Write a review" link. For a one-click review pop-up, replace this with
+  // https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID
+  // (find the Place ID at https://developers.google.com/maps/documentation/places/web-service/place-id)
+  reviewUrl: "https://www.google.com/maps/search/?api=1&query=Aspect+Plumbing+and+Heating+Lucan",
 
   hours: "Open 24 hours — 7 days a week",
   emergency: true,
